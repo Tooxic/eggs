@@ -8,7 +8,7 @@
     "author": "support@pterodactyl.io",
     "description": "Counter-Strike: Global Offensive is a multiplayer first-person shooter video game developed by Hidden Path Entertainment and Valve Corporation.",
     "image": "quay.io\/pterodactyl\/core:source",
-    "startup": ".\/srcds_run -game csgo -console -port {{SERVER_PORT}} +ip 0.0.0.0 +map {{SRCDS_MAP}} -strictportbind -norestart +sv_setsteamaccount {{STEAM_ACC}}",
+    "startup": "./srcds_run -game csgo -console -port {{SERVER_PORT}} +ip 0.0.0.0 +map {{SRCDS_MAP}} -tickrate {{TICK_RATE}} -strictportbind -norestart +sv_setsteamaccount {{STEAM_ACC}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Connection to Steam servers successful\",\r\n    \"userInteraction\": []\r\n}",
@@ -28,17 +28,17 @@
             "description": "The default map for the server.",
             "env_variable": "SRCDS_MAP",
             "default_value": "de_dust2",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|alpha_dash"
         },
         {
             "name": "Steam Account Token",
             "description": "The Steam Account Token required for the server to be displayed publicly.",
             "env_variable": "STEAM_ACC",
-            "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "default_value": "0FADF6BF989329B43CFE1DD0A79DE4D5",
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|alpha_num|size:32"
         },
         {
@@ -46,9 +46,18 @@
             "description": "Required for game to update on server restart. Do not modify this.",
             "env_variable": "SRCDS_APPID",
             "default_value": "740",
-            "user_viewable": 0,
-            "user_editable": 0,
+            "user_viewable": false,
+            "user_editable": false,
             "rules": "required|string|max:20"
+        },
+        {
+            "name": "Tick rate",
+            "description": "The tick rate of the server.",
+            "env_variable": "TICK_RATE",
+            "default_value": "64",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:4"
         }
     ]
 }
